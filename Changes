@@ -1,0 +1,7 @@
+# Change file for Plack::Middleware::RDF::Flow
+
+0.16 2011-07-21
+    Renamed to Plack::Middleware::RDF::Flow
+
+0.15 2011-07-19
+    Experimental origin in RDF::Light, RDF::Source etc.
