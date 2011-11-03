@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Plack::Middleware::RDF::Flow;
 BEGIN {
-  $Plack::Middleware::RDF::Flow::VERSION = '0.170';
+  $Plack::Middleware::RDF::Flow::VERSION = '0.171';
 }
 #ABSTRACT: Serve RDF as Linked Data for RDF::Flow
 
@@ -103,7 +103,7 @@ sub call {
             $rdf_data = $serializer->serialize_iterator_to_string( $rdf );
         }
 
-        if ( defined $rdf_data ) {
+        if ( $rdf_data ) {
             $rdf_data = encode('utf8',$rdf_data);
             return [ 200, [ 'Content-Type' => $type ], [ $rdf_data ] ];
         }
@@ -207,7 +207,7 @@ Plack::Middleware::RDF::Flow - Serve RDF as Linked Data for RDF::Flow
 
 =head1 VERSION
 
-version 0.170
+version 0.171
 
 =head1 SYNOPSIS
 
@@ -290,7 +290,8 @@ Code reference to rewrite the request URI.
 
 =item pass_through
 
-Retrieve RDF data
+Retrieve RDF data also if no serialization format was determined. In this case
+RDF data is stored in C<rdflow.data> and passed to the next layer.
 
 =item formats
 
